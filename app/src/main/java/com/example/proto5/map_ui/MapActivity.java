@@ -3,6 +3,7 @@ package com.example.proto5.map_ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +12,7 @@ import com.example.proto5.AssetLoader.FloorLoader;
 import com.example.proto5.AssetLoader.InternalFloorLoader;
 import com.example.proto5.R;
 import com.example.proto5.map_draw.MapOverlayView;
+import com.example.proto5.map_draw.OnMapSelectionListener;
 import com.example.proto5.qr_scanner.QrMain;
 
 public class MapActivity extends AppCompatActivity {
@@ -18,6 +20,7 @@ public class MapActivity extends AppCompatActivity {
     private ImageView floorMap;
     private MapOverlayView mapOverlay;
     private FloorLoader floorLoader;
+    TextView statusText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,26 @@ public class MapActivity extends AppCompatActivity {
             floorLoader = new AssetFloorLoader(this, floorMap, mapOverlay);
             floorLoader.load(floorName != null ? floorName : "IMCC_M_floor5");
         }
+        statusText = findViewById(R.id.statustext);
+
+        statusText.setText("Select source");
+
+        mapOverlay.setOnMapSelectionListener(new OnMapSelectionListener() {
+            @Override
+            public void onFirstPointSelected() {
+                statusText.setText("Select destination");
+            }
+
+            @Override
+            public void onPathDrawn() {
+                statusText.setText("Path drawn");
+            }
+
+            @Override
+            public void onReset() {
+                statusText.setText("Select source");
+            }
+        });
 
         setupButtons();
     }

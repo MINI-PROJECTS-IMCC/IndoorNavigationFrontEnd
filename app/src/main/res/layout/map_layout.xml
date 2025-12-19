@@ -50,15 +50,18 @@
         <com.example.proto5.map_draw.MapOverlayView
             android:id="@+id/overlayView1"
             android:layout_width="match_parent"
-            android:layout_height="659dp" />
+            android:layout_height="656dp" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/statustext"
             android:layout_width="276dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="#03A9F4"
+            android:textSize="20sp" />
 
 
     </FrameLayout>
